@@ -3,7 +3,6 @@ import { useApp } from '../../context/AppContext';
 import {
   ShieldCheck,
   Check,
-  RotateCcw,
   AlertCircle,
   Building2,
   X,
@@ -13,13 +12,17 @@ import {
   Clock,
   Briefcase,
   Users,
+  MessageSquare,
+  Send,
 } from 'lucide-react';
 import { Organization } from '../../types';
 
 export const AdminDashboard: React.FC = () => {
-  const { organizations, jobs, applications, verifyOrganization, resetToDefaults } = useApp();
+  const { organizations, jobs, applications, verifyOrganization, setNotifications } = useApp();
   const [actionToast, setActionToast] = useState<string | null>(null);
   const [inspectedOrg, setInspectedOrg] = useState<Organization | null>(null);
+  const [messagingOrg, setMessagingOrg] = useState<Organization | null>(null);
+  const [messageText, setMessageText] = useState('');
 
   const verifiedCount = organizations.filter((o) => o.verificationStatus === 'موثقة').length;
   const pendingCount = organizations.filter((o) => o.verificationStatus === 'بانتظار التحقق').length;
@@ -36,6 +39,33 @@ export const AdminDashboard: React.FC = () => {
     const label = status === 'موثقة' ? 'اعتماد' : status === 'بانتظار التحقق' ? 'تعليق' : 'رفض';
     setActionToast(`تم تنفيذ إجراء (${label}) على منشأة: ${orgName}`);
     setTimeout(() => setActionToast(null), 3000);
+  };
+
+  const openMessageModal = (org: Organization) => {
+    setMessagingOrg(org);
+    setMessageText('يرجى استيفاء وتحديث صورة السجل التجاري ورخصة التشغيل لاستكمال الاعتماد.');
+  };
+
+  const handleSendMessage = () => {
+    if (!messagingOrg || !messageText.trim()) return;
+
+    setNotifications((prev: any[]) => [
+      {
+        id: `notif-${Date.now()}`,
+        title: `ملاحظة رقابية من إدارة وظائف مطروح: ${messagingOrg.name}`,
+        message: messageText.trim(),
+        date: 'الآن',
+        read: false,
+        type: 'warning',
+      },
+      ...prev,
+    ]);
+
+    const orgName = messagingOrg.name;
+    setMessagingOrg(null);
+    setMessageText('');
+    setActionToast(`تم إرسال الملاحظة بنجاح إلى إدارة: ${orgName}`);
+    setTimeout(() => setActionToast(null), 3500);
   };
 
   const inspectedJobs = inspectedOrg
@@ -55,15 +85,6 @@ export const AdminDashboard: React.FC = () => {
             تدقيق السجلات التجارية، اعتماد المنشآت ومراقبة جودة وظائف مطروح
           </p>
         </div>
-
-        <button
-          onClick={resetToDefaults}
-          className="self-start sm:self-auto px-3 py-1.5 rounded-xl bg-white/10 hover:bg-rose-500/20 text-slate-300 hover:text-rose-300 text-xs font-bold border border-white/15 transition-colors flex items-center gap-1.5"
-          title="خاص بالأدمن فقط"
-        >
-          <RotateCcw className="w-3.5 h-3.5" />
-          <span>إعادة ضبط البيانات</span>
-        </button>
       </div>
 
       {actionToast && (
@@ -145,11 +166,21 @@ export const AdminDashboard: React.FC = () => {
                 </div>
               </div>
 
-              {/* Single word clean action buttons */}
+              {/* Clean action buttons with direct messaging */}
               <div
                 className="flex items-center gap-1.5 self-end sm:self-center"
                 onClick={(e) => e.stopPropagation()}
               >
+                <button
+                  type="button"
+                  onClick={() => openMessageModal(org)}
+                  className="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-teal-50 text-slate-700 hover:text-teal-700 text-xs font-bold transition-all flex items-center gap-1 border border-slate-200/80 shadow-2xs"
+                  title="إرسال ملاحظة أو طلب استيفاء للمنشأة"
+                >
+                  <MessageSquare className="w-3.5 h-3.5 text-teal-600" />
+                  <span>ملاحظة</span>
+                </button>
+
                 {org.verificationStatus !== 'موثقة' ? (
                   <button
                     onClick={() => handleStatusChange(org.id, org.name, 'موثقة')}
@@ -296,9 +327,17 @@ export const AdminDashboard: React.FC = () => {
             </div>
 
             {/* Actions Footer */}
-            <div className="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between gap-2">
-              <span className="text-[11px] text-slate-500 font-medium">اتخاذ قرار الاعتماد:</span>
-              <div className="flex items-center gap-2">
+            <div className="p-4 bg-slate-50 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <button
+                type="button"
+                onClick={() => openMessageModal(inspectedOrg)}
+                className="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center gap-1.5 border border-slate-200 transition-colors shadow-2xs cursor-pointer"
+              >
+                <MessageSquare className="w-3.5 h-3.5 text-teal-600" />
+                <span>إرسال ملاحظة / طلب استيفاء ترخيص</span>
+              </button>
+
+              <div className="flex items-center justify-end gap-2">
                 <button
                   onClick={() => handleStatusChange(inspectedOrg.id, inspectedOrg.name, 'موثقة')}
                   className={`px-4 py-2 rounded-xl font-bold text-xs shadow-xs transition-transform hover:scale-105 ${
@@ -326,6 +365,81 @@ export const AdminDashboard: React.FC = () => {
                   رفض
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Messaging / Deficiency Notice Modal */}
+      {messagingOrg && (
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 animate-in fade-in duration-150">
+          <div className="bg-white text-slate-800 w-full max-w-md rounded-3xl p-5 shadow-2xl border border-slate-200 space-y-4 text-right">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div className="flex items-center gap-2 font-black text-sm text-[#0F3D59]">
+                <MessageSquare className="w-5 h-5 text-teal-600" />
+                <span>إرسال ملاحظة رسمية إلى: {messagingOrg.name}</span>
+              </div>
+              <button
+                onClick={() => setMessagingOrg(null)}
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-600 cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-slate-700 block">
+                نماذج سريعة شائعة:
+              </label>
+              <div className="flex flex-wrap gap-1.5">
+                {[
+                  'يرجى إرفاق صورة واضحة من السجل التجاري الساري.',
+                  'صورة ترخيص وزارة السياحة أو تصريح التشغيل غير مكتملة.',
+                  'الاسم التجاري أو العنوان غير مطابق للأوراق الرسمية.',
+                  'يرجى تحديث رقم التواصل المعتمد للمنشأة.',
+                ].map((tmpl, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setMessageText(tmpl)}
+                    className="text-[10.5px] px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-teal-50 text-slate-700 hover:text-teal-800 border border-slate-200/80 transition-colors text-right cursor-pointer"
+                  >
+                    {tmpl}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-700 block">
+                نص الملاحظة الموجهة للمنشأة:
+              </label>
+              <textarea
+                value={messageText}
+                onChange={(e) => setMessageText(e.target.value)}
+                placeholder="اكتب تفاصيل الملاحظة أو النواقص المطلوب استيفاؤها..."
+                rows={3}
+                className="w-full text-xs p-3 rounded-xl border border-slate-200 focus:outline-hidden focus:border-teal-500 leading-relaxed"
+              />
+            </div>
+
+            <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
+              <button
+                type="button"
+                onClick={() => setMessagingOrg(null)}
+                className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold cursor-pointer"
+              >
+                إلغاء
+              </button>
+
+              <button
+                type="button"
+                onClick={handleSendMessage}
+                disabled={!messageText.trim()}
+                className="px-5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 disabled:opacity-50 text-white text-xs font-bold shadow-xs transition-all cursor-pointer"
+              >
+                إرسال الإشعار فوراً
+              </button>
             </div>
           </div>
         </div>

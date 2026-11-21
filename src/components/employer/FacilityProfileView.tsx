@@ -19,6 +19,7 @@ import { AreaName } from '../../types';
 export const FacilityProfileView: React.FC = () => {
   const {
     currentUser,
+    userRole,
     organizations,
     updateOrganization,
     setActiveTab,
@@ -102,7 +103,7 @@ export const FacilityProfileView: React.FC = () => {
         <div>
           <div className="flex items-center gap-2">
             <button
-              onClick={() => setActiveTab('employer-dashboard')}
+              onClick={() => setActiveTab(userRole === 'admin' ? 'admin-dashboard' : 'employer-dashboard')}
               className="p-1.5 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-200/60 transition-colors"
               title="العودة للوحة التحكم"
             >
@@ -118,7 +119,11 @@ export const FacilityProfileView: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-2">
-          {!isEditing ? (
+          {userRole === 'admin' ? (
+            <span className="px-3 py-1.5 rounded-xl bg-amber-50 text-amber-800 font-bold text-xs border border-amber-200">
+              ملف المنشأة (عرض رقابي للقراءة فقط)
+            </span>
+          ) : !isEditing ? (
             <button
               onClick={() => setIsEditing(true)}
               className="px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs transition-transform hover:scale-105"

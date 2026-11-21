@@ -122,14 +122,6 @@ export const EmployerDashboard: React.FC = () => {
 
         <div className="flex items-center gap-2">
           <button
-            onClick={() => setActiveTab('facility-profile')}
-            className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors"
-          >
-            <Building2 className="w-3.5 h-3.5 text-teal-600" />
-            <span>بيانات المنشأة والتراخيص</span>
-          </button>
-
-          <button
             onClick={() => setIsPostJobModalOpen(true)}
             className="px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs shadow-xs flex items-center justify-center gap-1.5 transition-transform hover:scale-105"
           >

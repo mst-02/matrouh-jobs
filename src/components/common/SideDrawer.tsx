@@ -296,6 +296,20 @@ export const SideDrawer: React.FC = () => {
                       <span>السيرة الذاتية (CV)</span>
                     </div>
                   </button>
+                ) : userRole === 'admin' ? (
+                  <button
+                    onClick={() => navigateTo('admin-dashboard')}
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-right transition-colors ${
+                      activeTab === 'admin-dashboard'
+                        ? 'bg-amber-50 text-amber-900 font-black'
+                        : 'text-slate-700 hover:bg-slate-50 bg-amber-50/30 border border-amber-100'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <ShieldCheck className="w-4 h-4 text-amber-600" />
+                      <span>بيانات المنشآت</span>
+                    </div>
+                  </button>
                 ) : (
                   <button
                     onClick={() => navigateTo('facility-profile')}
