@@ -67,15 +67,13 @@ export const Logo: React.FC<LogoProps> = ({
 
       {showText && (
         <div className={`flex flex-col ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-          <span className={`${textClass} font-black ${isDarkBg ? 'text-white' : 'text-[#0F3D59]'} tracking-tight leading-none`}>
-            {t.brandName}
-          </span>
-          <div className="flex items-center gap-1.5 mt-1">
-            <span className={`text-[10px] ${isDarkBg ? 'text-slate-300' : 'text-slate-500'} font-bold leading-none`}>
-              {t.brandTagline}
+          <div className="flex items-center gap-1.5">
+            <span className={`${textClass} font-black ${isDarkBg ? 'text-white' : 'text-[#0F3D59]'} tracking-tight leading-none`}>
+              {t.brandName}
             </span>
-            <span className={`text-[8.5px] font-extrabold px-1.5 py-0.5 rounded-sm ${isDarkBg ? 'bg-teal-900/60 text-teal-300 border-teal-700' : 'bg-teal-50 text-teal-700 border-teal-200'} border leading-none`}>
-              {t.officialBadge}
+            <span className={`text-xs font-bold ${isDarkBg ? 'text-teal-300/70' : 'text-slate-400'}`}>-</span>
+            <span className={`text-xs sm:text-sm font-extrabold ${isDarkBg ? 'text-teal-300' : 'text-teal-600'} tracking-tight leading-none`}>
+              {t.brandTagline}
             </span>
           </div>
         </div>

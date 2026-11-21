@@ -9,7 +9,6 @@ import {
   Building2,
   FileCheck2,
   PlusCircle,
-  Globe,
 } from 'lucide-react';
 import { Logo } from './Logo';
 
@@ -27,7 +26,6 @@ export const Header: React.FC = () => {
     setIsSideDrawerOpen,
     logout,
     language,
-    toggleLanguage,
     t,
   } = useApp();
 
@@ -178,18 +176,8 @@ export const Header: React.FC = () => {
             )}
           </nav>
 
-          {/* Left Controls: Language Switcher, Notifications & Clean Avatar Menu */}
+          {/* Left Controls: Notifications & Clean Avatar Menu */}
           <div className="flex items-center gap-2">
-            {/* Direct Language Switcher Button */}
-            <button
-              onClick={toggleLanguage}
-              className="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
-              title={language === 'ar' ? 'Switch to English' : 'التحويل للغة العربية'}
-            >
-              <Globe className="w-3.5 h-3.5 text-teal-600" />
-              <span>{t.switchLangText}</span>
-            </button>
-
             {/* Notifications Bell */}
             <div className="relative" ref={notifRef}>
               <button

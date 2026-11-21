@@ -6,7 +6,7 @@ import { LegalModal } from '../legal/LegalModal';
 import { AboutUsModal } from '../legal/AboutUsModal';
 
 export const Footer: React.FC = () => {
-  const { setActiveTab, language, setLanguage, t } = useApp();
+  const { setActiveTab, language, t } = useApp();
   const [legalModalOpen, setLegalModalOpen] = useState(false);
   const [legalTab, setLegalTab] = useState<'privacy' | 'terms'>('privacy');
   const [aboutUsOpen, setAboutUsOpen] = useState(false);
@@ -55,13 +55,6 @@ export const Footer: React.FC = () => {
                 className="hover:text-teal-400 transition-colors"
               >
                 {t.legalNavAbout}
-              </button>
-
-              <button
-                onClick={() => setLanguage(language === 'ar' ? 'en' : 'ar')}
-                className="px-2 py-0.5 rounded-lg border border-slate-700 hover:border-teal-500 text-teal-300 text-[11px] font-bold transition-colors"
-              >
-                {t.switchLangText}
               </button>
             </div>
           </div>

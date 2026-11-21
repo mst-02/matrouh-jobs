@@ -414,6 +414,40 @@ export const SideDrawer: React.FC = () => {
               </div>
             </div>
 
+            {/* Language Selection Card in Side Drawer */}
+            <div className="pt-2 border-t border-slate-100">
+              <div className="p-2.5 bg-slate-50/90 rounded-2xl border border-slate-200/80 flex items-center justify-between">
+                <div className="flex items-center gap-2 text-xs font-bold text-[#0F3D59]">
+                  <Globe className="w-4 h-4 text-teal-600" />
+                  <span>{language === 'ar' ? 'لغة العرض' : 'Language'}</span>
+                </div>
+                <div className="flex items-center gap-1 bg-white p-0.5 rounded-xl border border-slate-200 shadow-2xs">
+                  <button
+                    type="button"
+                    onClick={() => setLanguage('ar')}
+                    className={`px-2.5 py-1 rounded-lg text-[11px] font-extrabold transition-all ${
+                      language === 'ar'
+                        ? 'bg-teal-600 text-white shadow-xs'
+                        : 'text-slate-600 hover:text-slate-900'
+                    }`}
+                  >
+                    العربية
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLanguage('en')}
+                    className={`px-2.5 py-1 rounded-lg text-[11px] font-extrabold transition-all ${
+                      language === 'en'
+                        ? 'bg-teal-600 text-white shadow-xs'
+                        : 'text-slate-600 hover:text-slate-900'
+                    }`}
+                  >
+                    English
+                  </button>
+                </div>
+              </div>
+            </div>
+
             {/* Quick Links in requested order: سياسة الخصوصية -> سياسة الاستخدام -> من نحن */}
             <div className="pt-2 border-t border-slate-100 space-y-1 text-xs">
               <button
