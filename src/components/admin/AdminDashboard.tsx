@@ -52,11 +52,14 @@ export const AdminDashboard: React.FC = () => {
     setNotifications((prev: any[]) => [
       {
         id: `notif-${Date.now()}`,
-        title: `ملاحظة رقابية من إدارة وظائف مطروح: ${messagingOrg.name}`,
+        title: `ملاحظة من إدارة وظائف مطروح`,
         message: messageText.trim(),
         date: 'الآن',
         read: false,
         type: 'warning',
+        targetOrgId: messagingOrg.id,
+        targetOrgName: messagingOrg.name,
+        targetRole: 'employer',
       },
       ...prev,
     ]);

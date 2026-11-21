@@ -24,7 +24,10 @@ export interface NotificationItem {
   message: string;
   date: string;
   read: boolean;
-  type: 'application' | 'verification' | 'job' | 'system';
+  type: 'application' | 'verification' | 'job' | 'system' | 'warning' | 'notice';
+  targetOrgId?: string;
+  targetOrgName?: string;
+  targetRole?: 'employer' | 'seeker' | 'admin' | 'all';
 }
 
 interface AppContextType {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useApp } from '../../context/AppContext';
+import { useApp, NotificationItem } from '../../context/AppContext';
 import {
   Menu,
   Bell,
@@ -9,6 +9,7 @@ import {
   Building2,
   FileCheck2,
   PlusCircle,
+  X,
 } from 'lucide-react';
 import { Logo } from './Logo';
 
@@ -31,20 +32,36 @@ export const Header: React.FC = () => {
 
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [selectedNotification, setSelectedNotification] = useState<NotificationItem | null>(null);
 
   const notifRef = useRef<HTMLDivElement>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   // Strictly filter notifications by role to prevent cross-account leaks
   const userNotifications = notifications.filter((n) => {
+    // 1. Role targeting check
+    if (n.targetRole && n.targetRole !== 'all' && n.targetRole !== userRole) {
+      return false;
+    }
+
     if (userRole === 'admin') {
-      return n.type === 'verification' || n.type === 'system';
+      return n.type === 'verification' || n.type === 'system' || n.targetRole === 'admin';
     }
+
     if (userRole === 'employer') {
-      return n.type === 'job' || n.type === 'verification';
+      // Check if targeted specifically to this organization
+      if (n.targetOrgId || n.targetOrgName) {
+        const matchesOrg =
+          (currentUser?.organizationId && n.targetOrgId === currentUser.organizationId) ||
+          (currentUser?.name && n.targetOrgName && (currentUser.name.includes(n.targetOrgName) || n.targetOrgName.includes(currentUser.name))) ||
+          (currentUser?.name && n.title && n.title.includes(currentUser.name));
+        return matchesOrg;
+      }
+      return n.type === 'job' || n.type === 'verification' || n.type === 'warning' || n.type === 'notice';
     }
+
     // Seeker
-    return n.type === 'application' || n.type === 'system';
+    return n.type === 'application' || n.type === 'system' || n.targetRole === 'seeker';
   });
 
   const unreadCount = userNotifications.filter((n) => !n.read).length;
@@ -64,19 +81,15 @@ export const Header: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleNotificationClick = (notifId: string, notifType: string) => {
-    markNotificationAsRead(notifId);
+  const handleNotificationClick = (notif: NotificationItem) => {
+    markNotificationAsRead(notif.id);
     setIsNotifOpen(false);
-
-    if (userRole === 'employer') {
-      setActiveTab('employer-dashboard');
-    } else {
-      setActiveTab('applications');
-    }
+    setSelectedNotification(notif);
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-2xs">
+    <>
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-2xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-15 sm:h-16">
           {/* Right Section: 3-Bars Hamburger Menu + Custom SVG Logo */}
@@ -217,7 +230,7 @@ export const Header: React.FC = () => {
                       userNotifications.map((n) => (
                         <div
                           key={n.id}
-                          onClick={() => handleNotificationClick(n.id, n.type)}
+                          onClick={() => handleNotificationClick(n)}
                           className={`p-2.5 rounded-xl text-right transition-colors cursor-pointer ${
                             n.read ? 'bg-slate-50' : 'bg-teal-50/70 border-r-3 border-teal-500'
                           }`}
@@ -340,5 +353,68 @@ export const Header: React.FC = () => {
         </div>
       </div>
     </header>
+
+    {/* Notification Details Modal (Window صغيرة تعرض نص الملاحظة/الإشعار بالكامل) */}
+    {selectedNotification && (
+      <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
+        <div className="bg-white text-slate-800 w-full max-w-sm sm:max-w-md rounded-3xl p-5 sm:p-6 shadow-2xl border border-slate-200 space-y-4 text-right">
+          <div className="flex items-start justify-between pb-3 border-b border-slate-100 gap-2">
+            <div className="flex items-center gap-2.5">
+              <div
+                className={`p-2 rounded-2xl ${
+                  selectedNotification.type === 'warning'
+                    ? 'bg-amber-100 text-amber-700'
+                    : 'bg-teal-100 text-teal-700'
+                }`}
+              >
+                <Bell className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="font-black text-sm text-[#0F3D59] leading-tight">
+                  {selectedNotification.title}
+                </h3>
+                <span className="text-[10.5px] text-slate-400 font-bold block mt-0.5">
+                  {selectedNotification.date}
+                </span>
+              </div>
+            </div>
+            <button
+              onClick={() => setSelectedNotification(null)}
+              className="p-1 rounded-lg text-slate-400 hover:text-slate-600 cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Notification Text Card */}
+          <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 leading-relaxed text-xs text-slate-700 font-medium whitespace-pre-wrap">
+            {selectedNotification.message}
+          </div>
+
+          <div className="flex items-center justify-end gap-2 pt-1 border-t border-slate-100">
+            {userRole === 'employer' && (
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedNotification(null);
+                  setActiveTab('facility-profile');
+                }}
+                className="px-3.5 py-2 rounded-xl bg-teal-50 hover:bg-teal-100 text-teal-800 font-bold text-xs transition-colors cursor-pointer"
+              >
+                فتح بيانات المنشأة والتراخيص
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => setSelectedNotification(null)}
+              className="px-5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs shadow-xs transition-colors cursor-pointer"
+            >
+              حسناً، تم الاطلاع
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
+  </>
   );
 };
