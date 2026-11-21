@@ -1,0 +1,136 @@
+<svg width="393" height="852" viewBox="0 0 393 852" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- iPhone 16 Pro Shell (Dark Theme) -->
+  <rect width="393" height="852" rx="55" fill="#0B1E26"/>
+  <rect x="2" y="2" width="389" height="848" rx="53" stroke="#334155" stroke-width="4"/>
+  
+  <!-- Dynamic Island -->
+  <rect x="141" y="15" width="111" height="30" rx="15" fill="#000000"/>
+  <circle cx="230" cy="30" r="5" fill="#1E293B"/>
+
+  <!-- Status Bar (White) -->
+  <text x="35" y="36" fill="#FFFFFF" font-family="Montserrat, sans-serif" font-size="14" font-weight="700">9:41</text>
+  <g transform="translate(320, 24)" fill="#FFFFFF">
+    <path d="M1 9H3V12H1V9ZM5 6H7V12H5V6ZM9 3H11V12H9V3ZM13 0H15V12H13V0Z"/>
+    <path d="M22 2C19.5 2 17.5 3 16 4.5L22 12L28 4.5C26.5 3 24.5 2 22 2Z"/>
+    <rect x="33" y="1" width="20" height="10" rx="3" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+    <rect x="35" y="3" width="13" height="6" rx="1.5" fill="#FFFFFF"/>
+    <path d="M54 4V8" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Scanner Header -->
+  <g transform="translate(24, 75)">
+    <!-- Back Button -->
+    <circle cx="16" cy="12" r="16" fill="#FFFFFF" fill-opacity="0.15"/>
+    <path d="M18 7 L13 12 L18 17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <text x="172" y="18" fill="#FFFFFF" font-family="Cairo, sans-serif" font-size="18" font-weight="800" text-anchor="middle">مسح QR</text>
+  </g>
+
+  <!-- Viewfinder Frame & Simulated QR Code -->
+  <g transform="translate(96, 120)">
+    <!-- Scanner Brackets -->
+    <path d="M0 30 V0 H30" stroke="#C5A46D" stroke-width="4" stroke-linecap="round"/>
+    <path d="M200 30 V0 H170" stroke="#C5A46D" stroke-width="4" stroke-linecap="round"/>
+    <path d="M0 170 V200 H30" stroke="#C5A46D" stroke-width="4" stroke-linecap="round"/>
+    <path d="M200 170 V200 H170" stroke="#C5A46D" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Simulated QR Code Card in Camera View -->
+    <rect x="25" y="25" width="150" height="150" rx="16" fill="#FFFFFF"/>
+    <!-- QR Finder patterns -->
+    <rect x="40" y="40" width="34" height="34" rx="4" fill="#0F3B4C"/>
+    <rect x="46" y="46" width="22" height="22" rx="2" fill="#FFFFFF"/>
+    <rect x="51" y="51" width="12" height="12" rx="2" fill="#0F3B4C"/>
+
+    <rect x="126" y="40" width="34" height="34" rx="4" fill="#0F3B4C"/>
+    <rect x="132" y="46" width="22" height="22" rx="2" fill="#FFFFFF"/>
+    <rect x="137" y="51" width="12" height="12" rx="2" fill="#0F3B4C"/>
+
+    <rect x="40" y="126" width="34" height="34" rx="4" fill="#0F3B4C"/>
+    <rect x="46" y="132" width="22" height="22" rx="2" fill="#FFFFFF"/>
+    <rect x="51" y="137" width="12" height="12" rx="2" fill="#0F3B4C"/>
+
+    <!-- QR Data Blocks -->
+    <rect x="85" y="45" width="10" height="20" fill="#0F3B4C"/>
+    <rect x="100" y="45" width="15" height="10" fill="#0F3B4C"/>
+    <rect x="85" y="80" width="30" height="30" rx="4" fill="#C5A46D"/>
+    <rect x="125" y="95" width="20" height="10" fill="#0F3B4C"/>
+    <rect x="90" y="130" width="40" height="15" fill="#0F3B4C"/>
+    <rect x="140" y="125" width="15" height="25" fill="#0F3B4C"/>
+
+    <!-- Laser Line -->
+    <line x1="10" y1="100" x2="190" y2="100" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Gold SCAN Button -->
+  <g transform="translate(146, 335)">
+    <rect width="100" height="36" rx="18" fill="#C5A46D"/>
+    <text x="50" y="23" fill="#FFFFFF" font-family="Montserrat, sans-serif" font-size="14" font-weight="800" letter-spacing="1" text-anchor="middle">⚡ SCAN</text>
+  </g>
+
+  <!-- BOTTOM SHEET: Confirm Booking -->
+  <g transform="translate(0, 390)">
+    <path d="M0 32C0 14.3269 14.3269 0 32 0H361C378.673 0 393 14.3269 393 32V462H0V32Z" fill="#FFFFFF"/>
+    
+    <!-- Drag Handle -->
+    <rect x="172" y="12" width="48" height="5" rx="2.5" fill="#CBD5E1"/>
+
+    <!-- Sheet Title -->
+    <text x="196" y="48" fill="#0F3B4C" font-family="Cairo, sans-serif" font-size="20" font-weight="800" text-anchor="middle">تأكيد الحجز</text>
+
+    <!-- SECTION 1: Number of Persons -->
+    <g transform="translate(24, 70)">
+      <text x="345" y="0" fill="#64748B" font-family="Cairo, sans-serif" font-size="13" font-weight="700" text-anchor="end">عدد الأفراد</text>
+      
+      <!-- Adults Pill -->
+      <rect x="0" y="10" width="168" height="48" rx="14" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5"/>
+      <text x="84" y="40" fill="#1E293B" font-family="Cairo, sans-serif" font-size="14" font-weight="700" text-anchor="middle">2 Adults 👤</text>
+
+      <!-- Child Pill -->
+      <rect x="176" y="10" width="168" height="48" rx="14" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5"/>
+      <text x="260" y="40" fill="#1E293B" font-family="Cairo, sans-serif" font-size="14" font-weight="700" text-anchor="middle">1 Child 🧒</text>
+    </g>
+
+    <!-- SECTION 2: Nature & Date -->
+    <g transform="translate(24, 155)">
+      <text x="345" y="0" fill="#64748B" font-family="Cairo, sans-serif" font-size="13" font-weight="700" text-anchor="end">طبيعة الحجز وتاريخ المغادرة</text>
+      
+      <!-- Select Trip -->
+      <rect x="0" y="10" width="200" height="48" rx="14" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5"/>
+      <text x="15" y="38" fill="#0F3B4C" font-family="Cairo, sans-serif" font-size="13" font-weight="700">رحلة اليخت (مارينا 1)</text>
+      <path d="M180 34 L185 39 L190 34" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- Date Pill -->
+      <rect x="208" y="10" width="136" height="48" rx="14" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5"/>
+      <text x="265" y="39" fill="#1E293B" font-family="Montserrat, sans-serif" font-size="13" font-weight="700" text-anchor="middle">14/11/2026</text>
+      <!-- Mini Calendar Icon -->
+      <rect x="220" y="27" width="14" height="12" rx="2" stroke="#A98751" stroke-width="1.5" fill="none"/>
+    </g>
+
+    <!-- SECTION 3: Payment Method -->
+    <g transform="translate(24, 240)">
+      <text x="345" y="0" fill="#64748B" font-family="Cairo, sans-serif" font-size="13" font-weight="700" text-anchor="end">طريقة الدفع</text>
+      
+      <!-- Cash Button -->
+      <rect x="0" y="10" width="168" height="50" rx="14" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5"/>
+      <text x="84" y="41" fill="#64748B" font-family="Montserrat, sans-serif" font-size="14" font-weight="700" text-anchor="middle">Cash 💵</text>
+
+      <!-- Card Button (Active Gold) -->
+      <rect x="176" y="10" width="168" height="50" rx="14" fill="#C5A46D"/>
+      <text x="260" y="41" fill="#FFFFFF" font-family="Montserrat, sans-serif" font-size="14" font-weight="700" text-anchor="middle">Card 💳</text>
+    </g>
+
+    <!-- Total Price & Confirm Action -->
+    <g transform="translate(24, 330)">
+      <line x1="0" y1="0" x2="345" y2="0" stroke="#F1F5F9" stroke-width="1"/>
+      <text x="345" y="24" fill="#64748B" font-family="Cairo, sans-serif" font-size="13" text-anchor="end">الإجمالي المقدر:</text>
+      <text x="0" y="24" fill="#0F3B4C" font-family="Montserrat, sans-serif" font-size="18" font-weight="800">$350 USD</text>
+
+      <!-- Primary Action -->
+      <rect y="40" width="345" height="52" rx="16" fill="#0F3B4C"/>
+      <text x="172" y="72" fill="#FFFFFF" font-family="Cairo, sans-serif" font-size="15" font-weight="800" text-anchor="middle">إتمام الحجز وتوليد التذكرة ✓</text>
+    </g>
+  </g>
+
+  <!-- Home Indicator -->
+  <rect x="127" y="835" width="139" height="5" rx="2.5" fill="#000000" fill-opacity="0.3"/>
+</svg>

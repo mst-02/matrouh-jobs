@@ -1,0 +1,724 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YachtFlow - حجز اليخوت والرحلات الفاخرة</title>
+  <!-- Google Fonts: Cairo & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-canvas">
+
+  <!-- Figma Canvas Controls Header -->
+  <header class="figma-bar">
+    <div class="brand">
+      <div class="figma-badge"><i class="fa-brands fa-figma"></i> FIGMA PROTOTYPE VIEW</div>
+      <h1 class="project-title">YachtFlow UI/UX Flow</h1>
+      <span class="version-tag">v2.0 (app_02)</span>
+    </div>
+    
+    <div class="view-switcher">
+      <button id="btn-flow-view" class="view-btn active" title="عرض المسار الكامل كلوحة فيجما">
+        <i class="fa-solid fa-diagram-project"></i> عرض المسار الكامل (Flow Board)
+      </button>
+      <button id="btn-interactive-view" class="view-btn" title="تجربة المحاكاة التفاعلية كجهاز حقيقي">
+        <i class="fa-solid fa-mobile-screen-button"></i> وضع الموبايل التفاعلي (Interactive Device)
+      </button>
+    </div>
+
+    <div class="quick-actions">
+      <button id="btn-open-figma-guide" class="action-btn">
+        <i class="fa-solid fa-file-export"></i> تصدير لفيجما (Figma SVGs)
+      </button>
+      <button id="btn-reset-flow" class="action-btn outline">
+        <i class="fa-solid fa-rotate-right"></i> إعادة تعيين
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- VIEW 1: FULL FIGMA CANVAS BOARD (5 SCREENS)-->
+  <!-- ========================================== -->
+  <main id="figma-board" class="canvas-container visible">
+    <div class="board-wrapper">
+      
+      <!-- SCREEN 1: LOGIN -->
+      <div class="screen-frame-container" id="frame-1">
+        <div class="frame-label">
+          <span class="frame-tag">01</span>
+          <span class="frame-name">تسجيل الدخول / Login</span>
+        </div>
+        <div class="iphone-shell">
+          <div class="dynamic-island">
+            <div class="camera-dot"></div>
+          </div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="status-icons">
+              <i class="fa-solid fa-signal"></i>
+              <i class="fa-solid fa-wifi"></i>
+              <i class="fa-solid fa-battery-full"></i>
+            </div>
+          </div>
+
+          <!-- Screen Content -->
+          <div class="screen-content bg-cream">
+            
+            <!-- Sailboat Watermark -->
+            <div class="yacht-watermark">
+              <i class="fa-solid fa-sailboat"></i>
+            </div>
+
+            <!-- Brand Header: Exact YF Logo on Top Left -->
+            <div class="login-brand-header">
+              <div class="yacht-logo">
+                <img src="assets/yf_full_brand.png" alt="YachtFlow" class="yf-brand-img">
+              </div>
+              <h2 class="welcome-title">Welcome Back</h2>
+              <h3 class="welcome-subtitle">مرحبا بك</h3>
+            </div>
+
+            <!-- Login Form -->
+            <div class="login-form">
+              <div class="input-field-group">
+                <div class="dual-label">
+                  <span>Username or Email</span>
+                  <span>اسم المستخدم</span>
+                </div>
+                <div class="input-box">
+                  <i class="fa-regular fa-envelope input-icon"></i>
+                  <input type="text" id="demo-user" value="ahmed.mahmoud" placeholder="اسم المستخدم أو الإيميل">
+                </div>
+              </div>
+
+              <div class="input-field-group">
+                <div class="dual-label">
+                  <span>Password</span>
+                  <span>كلمة المرور</span>
+                </div>
+                <div class="input-box">
+                  <i class="fa-solid fa-lock input-icon"></i>
+                  <input type="password" id="demo-pass" value="••••••••" placeholder="كلمة المرور">
+                  <i class="fa-regular fa-eye toggle-pwd"></i>
+                </div>
+              </div>
+
+              <div class="forgot-row">
+                <a href="#reset" class="forgot-link">Forgot Password? / هل نسيت كلمة المرور؟</a>
+              </div>
+
+              <button class="primary-btn btn-login-action" onclick="appGoTo('explore')">
+                <span>تسجيل دخول</span>
+                <i class="fa-solid fa-arrow-left"></i>
+              </button>
+
+              <div class="new-account-callout">
+                <span>ليس لديك حساب؟ </span>
+                <a href="#signup" class="gold-link">إنشاء حساب جديد</a>
+              </div>
+
+              <!-- Social Login -->
+              <div class="social-login-section">
+                <div class="social-divider">
+                  <span>Social Login</span>
+                </div>
+                <div class="social-icons-row">
+                  <button class="social-btn apple-btn"><i class="fa-brands fa-apple"></i></button>
+                  <button class="social-btn google-btn"><i class="fa-brands fa-google"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="home-indicator"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLOW ARROW 1 -->
+      <div class="flow-connector">
+        <div class="arrow-line"></div>
+        <div class="arrow-tip"></div>
+        <span class="flow-label">تسجيل الدخول</span>
+      </div>
+
+      <!-- SCREEN 2: EXPLORE / TRIPS -->
+      <div class="screen-frame-container" id="frame-2">
+        <div class="frame-label">
+          <span class="frame-tag">02</span>
+          <span class="frame-name">استكشاف الرحلات / Trips</span>
+        </div>
+        <div class="iphone-shell">
+          <div class="dynamic-island">
+            <div class="camera-dot"></div>
+          </div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="status-icons">
+              <i class="fa-solid fa-signal"></i>
+              <i class="fa-solid fa-wifi"></i>
+              <i class="fa-solid fa-battery-full"></i>
+            </div>
+          </div>
+
+          <!-- Screen Content -->
+          <div class="screen-content bg-cream has-nav">
+            
+            <!-- Header bar -->
+            <div class="explore-top-bar">
+              <div class="user-greeting">
+                <span class="sub">مرحباً بك مجدداً</span>
+                <h4>أحمد محمود 👋</h4>
+              </div>
+              <div class="top-bell">
+                <i class="fa-regular fa-bell"></i>
+                <span class="badge-dot"></span>
+              </div>
+            </div>
+
+            <!-- Categories / Filter chips -->
+            <div class="filter-chips">
+              <span class="chip active"><i class="fa-solid fa-compass"></i> الكل</span>
+              <span class="chip"><i class="fa-solid fa-ship"></i> رحلات اليخوت</span>
+              <span class="chip"><i class="fa-solid fa-truck-monster"></i> سفاري</span>
+              <span class="chip"><i class="fa-solid fa-water"></i> غوص</span>
+            </div>
+
+            <!-- Cards Container matching Reference Image -->
+            <div class="trips-cards-list">
+              
+              <!-- Card 1: Yacht Trip -->
+              <div class="trip-card" onclick="openBooking('yacht')">
+                <div class="trip-image-box">
+                  <img src="assets/yacht_exact.png" alt="رحلة اليخت">
+                  <div class="trip-rating"><i class="fa-solid fa-star"></i> 4.9</div>
+                </div>
+                <div class="trip-body-grid">
+                  <div class="trip-left-col">
+                    <div class="trip-badge yacht-badge">
+                      <i class="fa-solid fa-sailboat"></i>
+                    </div>
+                    <span class="trip-cat-label">Yacht</span>
+                    <span class="trip-price-val">140 $</span>
+                  </div>
+                  <div class="trip-right-col">
+                    <h3 class="trip-title">رحلة اليخت</h3>
+                    <div class="trip-loc-row">Gouna Marina 1 📍</div>
+                    <div class="trip-loc-ar">الجونة مارينا 1</div>
+                    <div class="trip-time-row">🕒 05:00 مساء</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2: Safari Trip -->
+              <div class="trip-card" onclick="openBooking('safari')">
+                <div class="trip-image-box">
+                  <img src="assets/safari_exact.png" alt="رحلة سفاري">
+                  <div class="trip-rating"><i class="fa-solid fa-star"></i> 4.8</div>
+                </div>
+                <div class="trip-body-grid">
+                  <div class="trip-left-col">
+                    <div class="trip-badge safari-badge">
+                      <i class="fa-solid fa-truck-monster"></i>
+                    </div>
+                    <span class="trip-cat-label">Safari</span>
+                    <span class="trip-price-val">75 $</span>
+                  </div>
+                  <div class="trip-right-col">
+                    <h3 class="trip-title">رحلة سفاري</h3>
+                    <div class="trip-loc-row">Hurghada Reef 📍</div>
+                    <div class="trip-loc-ar">Hurghada Reef : الغردقة</div>
+                    <div class="trip-time-row">🕒 05:00 مساء</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Bottom Navigation Bar -->
+            <div class="bottom-nav">
+              <button class="nav-item active" onclick="appGoTo('explore')">
+                <i class="fa-solid fa-house"></i>
+              </button>
+              <button class="nav-item" onclick="appGoTo('profile')">
+                <i class="fa-regular fa-calendar"></i>
+              </button>
+              
+              <!-- Floating Center Button (QR Scan) -->
+              <div class="fab-wrapper">
+                <button class="fab-btn" onclick="appGoTo('scan')" title="مسح كود QR أو حجز مباشر">
+                  <i class="fa-solid fa-qrcode"></i>
+                </button>
+              </div>
+
+              <button class="nav-item" onclick="alert('الخريطة التفاعلية')">
+                <i class="fa-solid fa-map-pin"></i>
+              </button>
+              <button class="nav-item" onclick="appGoTo('profile')">
+                <i class="fa-regular fa-user"></i>
+              </button>
+            </div>
+
+            <div class="home-indicator"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLOW ARROW 2 -->
+      <div class="flow-connector">
+        <div class="arrow-line"></div>
+        <div class="arrow-tip"></div>
+        <span class="flow-label">مسح كود أو حجز</span>
+      </div>
+
+      <!-- SCREEN 3: QR SCANNER & BOOKING SHEET -->
+      <div class="screen-frame-container" id="frame-3">
+        <div class="frame-label">
+          <span class="frame-tag">03</span>
+          <span class="frame-name">المسح وتأكيد الحجز / Scan QR</span>
+        </div>
+        <div class="iphone-shell">
+          <div class="dynamic-island">
+            <div class="camera-dot"></div>
+          </div>
+          <div class="status-bar status-dark">
+            <span>9:41</span>
+            <div class="status-icons">
+              <i class="fa-solid fa-signal"></i>
+              <i class="fa-solid fa-wifi"></i>
+              <i class="fa-solid fa-battery-full"></i>
+            </div>
+          </div>
+
+          <!-- Screen Content (Dark Scanner + Bottom Sheet) -->
+          <div class="screen-content bg-scanner">
+            
+            <!-- Scanner Header -->
+            <div class="scanner-header">
+              <button class="back-circle-btn" onclick="appGoTo('explore')"><i class="fa-solid fa-chevron-right"></i></button>
+              <h3 class="scanner-title">مسح QR</h3>
+              <div class="placeholder-icon"></div>
+            </div>
+
+            <!-- Camera Viewport with Real QR Code -->
+            <div class="scanner-frame-wrapper">
+              <div class="scanner-laser"></div>
+              <div class="scanner-bracket tl"></div>
+              <div class="scanner-bracket tr"></div>
+              <div class="scanner-bracket bl"></div>
+              <div class="scanner-bracket br"></div>
+              
+              <div class="qr-target-preview">
+                <img src="assets/qr_scanner_exact.png" alt="كود QR للحجز">
+              </div>
+            </div>
+
+            <div class="scan-btn-row">
+              <button class="gold-capsule-btn" onclick="triggerScanSuccess()">
+                <i class="fa-solid fa-bolt"></i> SCAN
+              </button>
+            </div>
+
+            <!-- Bottom Sheet: Confirm Booking -->
+            <div class="booking-bottom-sheet">
+              <div class="sheet-drag-handle"></div>
+              <h3 class="sheet-title">تأكيد الحجز</h3>
+
+              <!-- Persons selector -->
+              <div class="sheet-section">
+                <label class="sheet-label">عدد الأفراد</label>
+                <div class="persons-pill-group">
+                  <div class="person-pill">
+                    <button class="counter-step" onclick="adjustCount('adults', -1)">-</button>
+                    <span id="adults-count">2 Adults 👤</span>
+                    <button class="counter-step" onclick="adjustCount('adults', 1)">+</button>
+                  </div>
+                  <div class="person-pill">
+                    <button class="counter-step" onclick="adjustCount('child', -1)">-</button>
+                    <span id="child-count">1 Child 🧒</span>
+                    <button class="counter-step" onclick="adjustCount('child', 1)">+</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Date & Nature of booking -->
+              <div class="sheet-section">
+                <label class="sheet-label">طبيعة الحجز وتاريخ المغادرة</label>
+                <div class="date-dropdown-row">
+                  <div class="select-pill">
+                    <select id="trip-select">
+                      <option value="yacht">رحلة اليخت (الجونة مارينا 1)</option>
+                      <option value="safari">رحلة سفاري (الغردقة ريف)</option>
+                    </select>
+                    <i class="fa-solid fa-angle-down"></i>
+                  </div>
+                  <div class="date-pill">
+                    <span>14/11/2026</span>
+                    <i class="fa-regular fa-calendar-days"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Payment Method Selection -->
+              <div class="sheet-section">
+                <label class="sheet-label">طريقة الدفع</label>
+                <div class="payment-tabs-row">
+                  <button class="payment-btn" id="pay-cash" onclick="setPayment('cash')">
+                    <span>Cash</span>
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                  </button>
+                  <button class="payment-btn active" id="pay-card" onclick="setPayment('card')">
+                    <span>Card</span>
+                    <i class="fa-regular fa-credit-card"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Action Footer -->
+              <div class="sheet-action-footer">
+                <div class="total-calc">
+                  <span class="total-lbl">الإجمالي المقدر:</span>
+                  <span class="total-amount" id="total-price">$350 USD</span>
+                </div>
+                <button class="confirm-booking-btn" onclick="appGoTo('ticket')">
+                  <span>إتمام الحجز وتوليد التذكرة</span>
+                  <i class="fa-solid fa-circle-check"></i>
+                </button>
+              </div>
+
+            </div>
+
+            <div class="home-indicator"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLOW ARROW 3 -->
+      <div class="flow-connector">
+        <div class="arrow-line"></div>
+        <div class="arrow-tip"></div>
+        <span class="flow-label">تأكيد الدفع</span>
+      </div>
+
+      <!-- SCREEN 4: BOOKING CONFIRMATION & TICKET -->
+      <div class="screen-frame-container" id="frame-4">
+        <div class="frame-label">
+          <span class="frame-tag">04</span>
+          <span class="frame-name">التذكرة والبوردنج / Boarding Pass</span>
+        </div>
+        <div class="iphone-shell">
+          <div class="dynamic-island">
+            <div class="camera-dot"></div>
+          </div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="status-icons">
+              <i class="fa-solid fa-signal"></i>
+              <i class="fa-solid fa-wifi"></i>
+              <i class="fa-solid fa-battery-full"></i>
+            </div>
+          </div>
+
+          <!-- Screen Content (Boarding Pass) -->
+          <div class="screen-content bg-light-map">
+            
+            <div class="ticket-header">
+              <h2 class="confirmed-title">تم تأكيد الحجز</h2>
+              <div class="ref-code">YF-26001482</div>
+            </div>
+
+            <!-- Big Digital Boarding Ticket -->
+            <div class="ticket-card">
+              
+              <!-- QR section -->
+              <div class="ticket-qr-area">
+                <div class="qr-box-frame">
+                  <img src="assets/qr_ticket_exact.png" alt="كود QR التذكرة">
+                </div>
+              </div>
+
+              <!-- Ticket Info Details -->
+              <div class="ticket-info-body">
+                <div class="ticket-info-header">
+                  <h4 class="ticket-heading">تم تأكيد الحجز</h4>
+                  <span class="ticket-order-no">رقم الحجز: YF-26001482</span>
+                </div>
+
+                <div class="ticket-rows">
+                  <div class="ticket-row-item">
+                    <span class="field-name-en">Passenger Name</span>
+                    <span class="field-val-ar">أحمد محمود</span>
+                  </div>
+
+                  <div class="ticket-row-item">
+                    <span class="field-val-date">25 إبريل</span>
+                    <div class="trip-dest-badge">
+                      <i class="fa-solid fa-sailboat"></i>
+                      <span>رحلة اليخت</span>
+                    </div>
+                  </div>
+
+                  <div class="ticket-row-item">
+                    <span class="field-val-time">05:00 مساء</span>
+                    <div class="loc-badge">
+                      <i class="fa-solid fa-location-dot"></i>
+                      <span>الجونة مارينا 1</span>
+                    </div>
+                  </div>
+
+                  <div class="ticket-row-item">
+                    <span class="paid-badge"><i class="fa-solid fa-check"></i> Paid</span>
+                    <div class="pax-type">
+                      <span>👤 الركاب  عدد الأفراد: 2</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Ticket Actions -->
+            <div class="ticket-actions-group">
+              <button class="action-capsule-btn" onclick="appGoTo('profile')">
+                <i class="fa-solid fa-wallet"></i> عرض في الحجوزات النشطة
+              </button>
+              <button class="text-link-btn" onclick="appGoTo('explore')">
+                <i class="fa-solid fa-arrow-right"></i> العودة للرئيسية
+              </button>
+            </div>
+
+            <div class="home-indicator"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLOW ARROW 4 -->
+      <div class="flow-connector">
+        <div class="arrow-line"></div>
+        <div class="arrow-tip"></div>
+        <span class="flow-label">الحساب والحجوزات</span>
+      </div>
+
+      <!-- SCREEN 5: USER PROFILE & BOOKINGS -->
+      <div class="screen-frame-container" id="frame-5">
+        <div class="frame-label">
+          <span class="frame-tag">05</span>
+          <span class="frame-name">الملف الشخصي / Profile</span>
+        </div>
+        <div class="iphone-shell">
+          <div class="dynamic-island">
+            <div class="camera-dot"></div>
+          </div>
+          <div class="status-bar status-dark">
+            <span>9:41</span>
+            <div class="status-icons">
+              <i class="fa-solid fa-signal"></i>
+              <i class="fa-solid fa-wifi"></i>
+              <i class="fa-solid fa-battery-full"></i>
+            </div>
+          </div>
+
+          <!-- Screen Content -->
+          <div class="screen-content bg-cream has-nav">
+            
+            <!-- User Header Dark Teal Banner -->
+            <div class="profile-teal-header">
+              <div class="avatar-ring">
+                <img src="assets/avatar_exact.png" alt="أحمد محمود">
+              </div>
+              <h3 class="profile-name-ar">أحمد محمود</h3>
+              <span class="profile-name-sub">أحمد محمود · Ahmed Mahmoud</span>
+            </div>
+
+            <!-- Quick Links (Gold Banner) -->
+            <div class="quick-links-card">
+              <div class="quick-links-header">
+                <span>Quick Links</span>
+              </div>
+              <div class="quick-links-list">
+                <div class="link-item">
+                  <div class="link-left">
+                    <i class="fa-regular fa-id-badge"></i>
+                    <span>Personal Data</span>
+                  </div>
+                  <span class="link-ar">بيانات شخصية</span>
+                  <i class="fa-solid fa-chevron-left arrow-gold"></i>
+                </div>
+                <div class="link-item">
+                  <div class="link-left">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Wallet</span>
+                  </div>
+                  <span class="link-ar">محفظتي</span>
+                  <i class="fa-solid fa-chevron-left arrow-gold"></i>
+                </div>
+                <div class="link-item">
+                  <div class="link-left">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>Settings</span>
+                  </div>
+                  <span class="link-ar">الإعدادات</span>
+                  <i class="fa-solid fa-chevron-left arrow-gold"></i>
+                </div>
+                <div class="link-item">
+                  <div class="link-left">
+                    <i class="fa-regular fa-circle-question"></i>
+                    <span>Settings</span>
+                  </div>
+                  <span class="link-ar">مساعدة ودعم</span>
+                  <i class="fa-solid fa-chevron-left arrow-gold"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Booking List -->
+            <div class="bookings-history-section">
+              <div class="section-title-row">
+                <h4>Booking List</h4>
+                <span class="badge-count">2 رحلات</span>
+              </div>
+
+              <!-- Active Bookings -->
+              <div class="booking-group">
+                <span class="group-title-label">Active bookings</span>
+                <div class="booking-mini-card" onclick="appGoTo('ticket')">
+                  <div class="mini-thumb">
+                    <img src="assets/yacht_exact.png" alt="Gouna Marina 1">
+                  </div>
+                  <div class="mini-info">
+                    <h5>Gouna Marina 1</h5>
+                    <p class="mini-time">25 إبريل · 05:00 مساء</p>
+                    <span class="mini-ref">رقم الحجز: YF-26001482</span>
+                  </div>
+                  <div class="mini-status">
+                    <span class="active-dot"></span>
+                    <i class="fa-solid fa-ticket"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Upcoming Bookings -->
+              <div class="booking-group">
+                <span class="group-title-label">Upcoming bookings</span>
+                <div class="booking-mini-card">
+                  <div class="mini-thumb">
+                    <img src="assets/safari_exact.png" alt="Hurghada Reef">
+                  </div>
+                  <div class="mini-info">
+                    <h5>Hurghada Reef</h5>
+                    <p class="mini-time">25 إبريل · 05:00 مساء</p>
+                    <span class="mini-ref">رقم الحجز: YF-26001482</span>
+                  </div>
+                  <div class="mini-status">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Notification Alert -->
+              <div class="notification-banner-card">
+                <div class="notif-bell-icon">
+                  <i class="fa-solid fa-bell"></i>
+                </div>
+                <div class="notif-text">
+                  <h6>Notification</h6>
+                  <p>Active bookings</p>
+                </div>
+                <i class="fa-solid fa-gear notif-gear"></i>
+              </div>
+            </div>
+
+            <!-- Bottom Navigation Bar -->
+            <div class="bottom-nav">
+              <button class="nav-item" onclick="appGoTo('explore')">
+                <i class="fa-solid fa-house"></i>
+              </button>
+              <button class="nav-item" onclick="appGoTo('profile')">
+                <i class="fa-regular fa-calendar"></i>
+              </button>
+              
+              <!-- Floating Center Button -->
+              <div class="fab-wrapper">
+                <button class="fab-btn" onclick="appGoTo('scan')">
+                  <i class="fa-solid fa-qrcode"></i>
+                </button>
+              </div>
+
+              <button class="nav-item has-badge">
+                <i class="fa-regular fa-bell"></i>
+                <span class="nav-badge">1</span>
+              </button>
+              <button class="nav-item active" onclick="appGoTo('profile')">
+                <i class="fa-solid fa-user"></i>
+              </button>
+            </div>
+
+            <div class="home-indicator"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ============================================== -->
+  <!-- VIEW 2: SINGLE INTERACTIVE DEVICE SIMULATOR   -->
+  <!-- ============================================== -->
+  <div id="interactive-device-view" class="device-modal-container">
+    <div class="device-stage">
+      <div class="device-controls">
+        <span class="screen-title-badge" id="current-screen-name">شاشة تسجيل الدخول</span>
+        <div class="quick-nav-pills">
+          <button class="pill-btn active" onclick="appGoTo('login')">1. الدخول</button>
+          <button class="pill-btn" onclick="appGoTo('explore')">2. الرحلات</button>
+          <button class="pill-btn" onclick="appGoTo('scan')">3. المسح والحجز</button>
+          <button class="pill-btn" onclick="appGoTo('ticket')">4. التذكرة</button>
+          <button class="pill-btn" onclick="appGoTo('profile')">5. الحساب</button>
+        </div>
+      </div>
+      
+      <!-- Single Container where active screen mounts -->
+      <div class="single-iphone-wrapper" id="simulator-target">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- FIGMA EXPORT MODAL                            -->
+  <!-- ============================================== -->
+  <div id="figma-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="figma-icon-title">
+          <i class="fa-brands fa-figma figma-brand-color"></i>
+          <h3>تصدير ملفات فيجما (Figma UI/UX Vector Artboards)</h3>
+        </div>
+        <button class="modal-close" onclick="closeFigmaModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-intro">
+          تم إنشاء جميع شاشات التطبيق كملفات Vector SVG احترافية متوافقة 100% مع فيجما.
+        </p>
+
+        <div class="download-grid">
+          <a href="figma_screens/00_yachtflow_full_board.svg" download="00_yachtflow_full_board.svg" class="download-card highlight">
+            <i class="fa-solid fa-layer-group"></i>
+            <div>
+              <strong>00_yachtflow_full_board.svg</strong>
+              <span>اللوحة الكاملة (5 شاشات مع أسهم التدفق التفاعلي)</span>
+            </div>
+            <i class="fa-solid fa-download"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

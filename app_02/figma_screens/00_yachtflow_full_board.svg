@@ -1,0 +1,80 @@
+<svg width="2450" height="1000" viewBox="0 0 2450 1000" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- Figma Canvas Background -->
+  <rect width="2450" height="1000" fill="#EAEFF2"/>
+  
+  <!-- Canvas Title & Info -->
+  <g transform="translate(60, 50)">
+    <rect width="180" height="34" rx="8" fill="#0F3B4C"/>
+    <text x="90" y="22" fill="#0ACF83" font-family="Montserrat, sans-serif" font-size="13" font-weight="800" text-anchor="middle">FIGMA UI/UX BOARD</text>
+    <text x="200" y="24" fill="#0F3B4C" font-family="Montserrat, sans-serif" font-size="22" font-weight="900">YachtFlow - User Flow &amp; Interactions</text>
+    <text x="680" y="24" fill="#64748B" font-family="Cairo, sans-serif" font-size="14">مسار حجز رحلات اليخوت والسفاري المتكامل</text>
+  </g>
+
+  <!-- SCREEN 1: LOGIN (x: 60, y: 100) -->
+  <g transform="translate(60, 100)">
+    <!-- Label -->
+    <rect x="0" y="-35" width="160" height="26" rx="13" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <text x="80" y="-18" fill="#0F3B4C" font-family="Cairo, sans-serif" font-size="12" font-weight="700" text-anchor="middle">01 · تسجيل الدخول</text>
+    <image href="01_login_screen.svg" width="393" height="852"/>
+  </g>
+
+  <!-- FLOW ARROW 1 -> 2 (x: 465, y: 520) -->
+  <g transform="translate(465, 520)">
+    <line x1="0" y1="0" x2="65" y2="0" stroke="#94A3B8" stroke-width="2.5"/>
+    <polygon points="65,-6 77,0 65,6" fill="#94A3B8"/>
+    <rect x="-5" y="10" width="85" height="20" rx="4" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <text x="37" y="24" fill="#64748B" font-family="Cairo, sans-serif" font-size="9" font-weight="700" text-anchor="middle">تسجيل الدخول</text>
+  </g>
+
+  <!-- SCREEN 2: EXPLORE (x: 550, y: 100) -->
+  <g transform="translate(550, 100)">
+    <rect x="0" y="-35" width="160" height="26" rx="13" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <text x="80" y="-18" fill="#0F3B4C" font-family="Cairo, sans-serif" font-size="12" font-weight="700" text-anchor="middle">02 · استكشاف الرحلات</text>
+    <image href="02_explore_trips.svg" width="393" height="852"/>
+  </g>
+
+  <!-- FLOW ARROW 2 -> 3 (x: 955, y: 520) -->
+  <g transform="translate(955, 520)">
+    <line x1="0" y1="0" x2="65" y2="0" stroke="#94A3B8" stroke-width="2.5"/>
+    <polygon points="65,-6 77,0 65,6" fill="#94A3B8"/>
+    <rect x="-5" y="10" width="85" height="20" rx="4" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <text x="37" y="24" fill="#64748B" font-family="Cairo, sans-serif" font-size="9" font-weight="700" text-anchor="middle">مسح كود أو حجز</text>
+  </g>
+
+  <!-- SCREEN 3: SCAN & BOOK (x: 1040, y: 100) -->
+  <g transform="translate(1040, 100)">
+    <rect x="0" y="-35" width="180" height="26" rx="13" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <text x="90" y="-18" fill="#0F3B4C" font-family="Cairo, sans-serif" font-size="12" font-weight="700" text-anchor="middle">03 · المسح وتأكيد الحجز</text>
+    <image href="03_qr_scanner_booking.svg" width="393" height="852"/>
+  </g>
+
+  <!-- FLOW ARROW 3 -> 4 (x: 1445, y: 520) -->
+  <g transform="translate(1445, 520)">
+    <line x1="0" y1="0" x2="65" y2="0" stroke="#94A3B8" stroke-width="2.5"/>
+    <polygon points="65,-6 77,0 65,6" fill="#94A3B8"/>
+    <rect x="-5" y="10" width="85" height="20" rx="4" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <text x="37" y="24" fill="#64748B" font-family="Cairo, sans-serif" font-size="9" font-weight="700" text-anchor="middle">تأكيد الدفع</text>
+  </g>
+
+  <!-- SCREEN 4: TICKET CONFIRMATION (x: 1530, y: 100) -->
+  <g transform="translate(1530, 100)">
+    <rect x="0" y="-35" width="180" height="26" rx="13" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <text x="90" y="-18" fill="#0F3B4C" font-family="Cairo, sans-serif" font-size="12" font-weight="700" text-anchor="middle">04 · التذكرة والبوردنج</text>
+    <image href="04_ticket_confirmation.svg" width="393" height="852"/>
+  </g>
+
+  <!-- FLOW ARROW 4 -> 5 (x: 1935, y: 520) -->
+  <g transform="translate(1935, 520)">
+    <line x1="0" y1="0" x2="65" y2="0" stroke="#94A3B8" stroke-width="2.5"/>
+    <polygon points="65,-6 77,0 65,6" fill="#94A3B8"/>
+    <rect x="-5" y="10" width="85" height="20" rx="4" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <text x="37" y="24" fill="#64748B" font-family="Cairo, sans-serif" font-size="9" font-weight="700" text-anchor="middle">الحساب والحجوزات</text>
+  </g>
+
+  <!-- SCREEN 5: PROFILE & BOOKINGS (x: 2020, y: 100) -->
+  <g transform="translate(2020, 100)">
+    <rect x="0" y="-35" width="180" height="26" rx="13" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <text x="90" y="-18" fill="#0F3B4C" font-family="Cairo, sans-serif" font-size="12" font-weight="700" text-anchor="middle">05 · البروفايل والحجوزات</text>
+    <image href="05_profile_bookings.svg" width="393" height="852"/>
+  </g>
+</svg>

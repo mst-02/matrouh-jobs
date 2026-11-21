@@ -1,0 +1,53 @@
+{
+  "name": "YachtFlow Design System",
+  "version": "2.0.0",
+  "colors": {
+    "primary": {
+      "navy": "#0F3B4C",
+      "darkNavy": "#092530",
+      "waveTeal": "#16566E",
+      "lightTeal": "#F0F6F8"
+    },
+    "accent": {
+      "luxuryGold": "#C5A46D",
+      "goldDark": "#A98751",
+      "goldLight": "#E9D5B3",
+      "champagne": "#FAF8F5"
+    },
+    "neutral": {
+      "canvas": "#EAEFF2",
+      "white": "#FFFFFF",
+      "slate100": "#F1F5F9",
+      "slate200": "#E2E8F0",
+      "slate400": "#94A3B8",
+      "slate600": "#475569",
+      "slate900": "#0F172A"
+    },
+    "semantic": {
+      "successGreen": "#10B981",
+      "successBg": "#ECFDF5",
+      "warningAmber": "#F59E0B",
+      "dangerRed": "#EF4444"
+    }
+  },
+  "typography": {
+    "primaryFontArabic": "Cairo, sans-serif",
+    "primaryFontEnglish": "Montserrat, sans-serif",
+    "sizes": {
+      "xs": "10px",
+      "sm": "12px",
+      "base": "14px",
+      "lg": "16px",
+      "xl": "18px",
+      "2xl": "22px",
+      "3xl": "28px"
+    }
+  },
+  "device": {
+    "target": "Apple iPhone 16 Pro",
+    "width": 393,
+    "height": 852,
+    "cornerRadius": 55,
+    "notch": "Dynamic Island (111x30)"
+  }
+}
