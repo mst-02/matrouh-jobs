@@ -23,13 +23,13 @@ export const MATROUH_AREAS: Area[] = [
     id: 'area-4',
     name: 'سيوة',
     tagline: 'واحة الأصالة، بحيرات الملح الفيروزية والمأكولات التراثية',
-    image: './images/areas/siwa.jpg',
+    image: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80',
   },
   {
     id: 'area-5',
     name: 'الحمام',
     tagline: 'بوابة مطروح الشرقية وسوقها التجاري والخدمي العريق',
-    image: './images/areas/el_hamam.jpg',
+    image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80',
   },
   {
     id: 'area-6',
