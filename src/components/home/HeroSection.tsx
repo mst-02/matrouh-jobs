@@ -15,18 +15,38 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {
   const [showIosGuide, setShowIosGuide] = useState(false);
   const [showAndroidGuide, setShowAndroidGuide] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [isInstalled, setIsInstalled] = useState(false);
+  const [installSuccessToast, setInstallSuccessToast] = useState(false);
 
   useEffect(() => {
-    const handleBeforeInstallPrompt = (e: Event) => {
+    // Check if running in standalone mode (already installed on homescreen)
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || (navigator as any).standalone;
+    if (isStandalone) {
+      setIsInstalled(true);
+    }
+
+    const handleBeforeInstallPrompt = (e: any) => {
       e.preventDefault();
       setDeferredPrompt(e);
     };
+
+    const handleAppInstalled = () => {
+      setDeferredPrompt(null);
+      setIsInstalled(true);
+      setInstallSuccessToast(true);
+      setTimeout(() => setInstallSuccessToast(false), 5000);
+    };
+
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('appinstalled', handleAppInstalled);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('appinstalled', handleAppInstalled);
+    };
   }, []);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
     onSearch(keyword, selectedArea, selectedCategory);
     setActiveTab('search');
   };
@@ -37,12 +57,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {
     setActiveTab('search');
   };
 
-  const handleInstallAndroid = () => {
+  const handleInstallAndroid = async () => {
+    if (isInstalled) {
+      alert(language === 'ar' ? 'التطبيق مثبت بالفعل ويعمل كأيقونة على شاشة هاتفك!' : 'The app is already installed on your device!');
+      return;
+    }
+
     if (deferredPrompt) {
       deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(() => {
+      const choice = await deferredPrompt.userChoice;
+      if (choice && choice.outcome === 'accepted') {
         setDeferredPrompt(null);
-      });
+        setInstallSuccessToast(true);
+        setTimeout(() => setInstallSuccessToast(false), 5000);
+      }
     } else {
       setShowAndroidGuide(true);
     }
@@ -181,14 +209,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {
         </div>
       </div>
 
-      {/* Android App Installation Guide Modal */}
+      {/* Success Installation Toast */}
+      {installSuccessToast && (
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-emerald-600 text-white font-bold text-xs px-4 py-3 rounded-2xl shadow-xl flex items-center gap-2 border border-emerald-400 animate-in fade-in slide-in-from-top-4 duration-300">
+          <Check className="w-4 h-4 text-white" />
+          <span>{language === 'ar' ? '🎉 تم تثبيت تطبيق وظائف مطروح بنجاح على هاتفك!' : '🎉 App successfully installed on your home screen!'}</span>
+        </div>
+      )}
+
+      {/* Android App Installation Direct Modal */}
       {showAndroidGuide && (
         <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 animate-in fade-in duration-150">
-          <div className="bg-white text-slate-800 w-full max-w-sm rounded-3xl p-5 shadow-2xl border border-slate-200 space-y-4 text-right">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div className="bg-white text-slate-800 w-full max-w-sm rounded-3xl p-5 shadow-2xl border border-slate-200 space-y-4 text-center">
+            <div className="flex justify-between items-center pb-2 border-b border-slate-100">
               <div className="flex items-center gap-2 font-black text-sm text-[#0F3D59]">
                 <Smartphone className="w-5 h-5 text-emerald-600" />
-                <span>تثبيت تطبيق وظائف مطروح على أندرويد</span>
+                <span>تثبيت تطبيق وظائف مطروح</span>
               </div>
               <button
                 onClick={() => setShowAndroidGuide(false)}
@@ -198,42 +234,33 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {
               </button>
             </div>
 
-            <div className="space-y-3 text-xs text-slate-600 leading-relaxed">
-              <div className="flex items-start gap-2.5">
-                <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center shrink-0">1</span>
-                <p>افتح الموقع في متصفح <strong>Chrome</strong> على هاتفك الأندرويد.</p>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center shrink-0">2</span>
-                <p>اضغط على قائمة المتصفح <strong>(الثلاث نقاط الرأسية ⋮)</strong> في أعلى الشاشة.</p>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center shrink-0">3</span>
-                <p>اختر <strong>«تثبيت التطبيق»</strong> أو <strong>«إضافة إلى الشاشة الرئيسية» (Add to Home screen)</strong>.</p>
-              </div>
-              <p className="text-[11px] text-emerald-800 font-semibold bg-emerald-50 p-2.5 rounded-xl border border-emerald-200">
-                سيظهر التطبيق فوراً كأيقونة على شاشة هاتفك ويعمل بملء الشاشة فائق السرعة وبدون أي أخطاء ملفات APK.
-              </p>
-            </div>
+            <p className="text-xs text-slate-600 leading-relaxed font-medium">
+              اضغط على زر <strong>(تثبيت التطبيق)</strong> من خيارات المتصفح ليظهر فوراً كأيقونة تطبيق كامل على شاشة هاتفك ويعمل بملء الشاشة بدون أي متصفح.
+            </p>
 
             <button
-              onClick={() => setShowAndroidGuide(false)}
-              className="w-full py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-xs"
+              onClick={() => {
+                if (deferredPrompt) {
+                  deferredPrompt.prompt();
+                }
+                setShowAndroidGuide(false);
+              }}
+              className="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-colors"
             >
-              تم، سأقوم بالتثبيت الآن
+              تثبيت الآن على الهاتف
             </button>
           </div>
         </div>
       )}
 
-      {/* iOS App Installation Guide Modal */}
+      {/* iOS App Installation Direct Banner */}
       {showIosGuide && (
         <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 animate-in fade-in duration-150">
-          <div className="bg-white text-slate-800 w-full max-w-sm rounded-3xl p-5 shadow-2xl border border-slate-200 space-y-4 text-right">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div className="bg-white text-slate-800 w-full max-w-sm rounded-3xl p-5 shadow-2xl border border-slate-200 space-y-4 text-center">
+            <div className="flex justify-between items-center pb-2 border-b border-slate-100">
               <div className="flex items-center gap-2 font-black text-sm text-[#0F3D59]">
                 <Apple className="w-5 h-5 text-slate-900" />
-                <span>تثبيت تطبيق وظائف مطروح على iPhone</span>
+                <span>إضافة التطبيق للآيفون</span>
               </div>
               <button
                 onClick={() => setShowIosGuide(false)}
@@ -243,29 +270,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {
               </button>
             </div>
 
-            <div className="space-y-3 text-xs text-slate-600 leading-relaxed">
-              <div className="flex items-start gap-2.5">
-                <span className="w-5 h-5 rounded-full bg-teal-100 text-teal-800 font-bold flex items-center justify-center shrink-0">1</span>
-                <p>افتح الموقع في متصفح <strong>Safari</strong> على جهاز الآيفون الخاص بك.</p>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <span className="w-5 h-5 rounded-full bg-teal-100 text-teal-800 font-bold flex items-center justify-center shrink-0">2</span>
-                <p>اضغط على زر المشاركة <strong>(Share / سهم لأعلى)</strong> أسفل شاشة المتصفح.</p>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <span className="w-5 h-5 rounded-full bg-teal-100 text-teal-800 font-bold flex items-center justify-center shrink-0">3</span>
-                <p>اختر <strong>«إضافة إلى الشاشة الرئيسية» (Add to Home Screen)</strong>.</p>
-              </div>
-              <p className="text-[11px] text-teal-700 font-semibold bg-teal-50 p-2.5 rounded-xl border border-teal-200">
-                سيعمل معك التطبيق فوراً بشاشة كاملة وبسرعة فائقة بدون الحاجة لـ App Store.
-              </p>
-            </div>
+            <p className="text-xs text-slate-600 leading-relaxed font-medium">
+              من أسفل متصفح Safari، اضغط على زر المشاركة <strong>(Share / سهم لأعلى ⎋)</strong> ثم اختر <strong>«إضافة إلى الشاشة الرئيسية ➕»</strong> ليثبت فوراً كأيقونة على هاتفك.
+            </p>
 
             <button
               onClick={() => setShowIosGuide(false)}
-              className="w-full py-2.5 rounded-xl bg-teal-600 text-white font-bold text-xs"
+              className="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-black text-white font-bold text-xs shadow-md transition-colors"
             >
-              تم الفهم
+              حسناً، فهمت
             </button>
           </div>
         </div>

@@ -8,3 +8,13 @@ createRoot(document.getElementById('root')!).render(
     <App />
   </StrictMode>,
 )
+
+// Register Service Worker for Instant PWA Installation
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('./sw.js')
+      .then((reg) => console.log('SW Registered: ', reg.scope))
+      .catch((err) => console.warn('SW registration skipped: ', err));
+  });
+}
