@@ -25,22 +25,37 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {
       setIsInstalled(true);
     }
 
+    // Check if already captured in index.html
+    if ((window as any).deferredPrompt) {
+      setDeferredPrompt((window as any).deferredPrompt);
+    }
+
+    const onPwaReady = () => {
+      if ((window as any).deferredPrompt) {
+        setDeferredPrompt((window as any).deferredPrompt);
+      }
+    };
+
     const handleBeforeInstallPrompt = (e: any) => {
       e.preventDefault();
+      (window as any).deferredPrompt = e;
       setDeferredPrompt(e);
     };
 
     const handleAppInstalled = () => {
       setDeferredPrompt(null);
+      (window as any).deferredPrompt = null;
       setIsInstalled(true);
       setInstallSuccessToast(true);
       setTimeout(() => setInstallSuccessToast(false), 5000);
     };
 
+    window.addEventListener('pwa-prompt-ready', onPwaReady);
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
     window.addEventListener('appinstalled', handleAppInstalled);
 
     return () => {
+      window.removeEventListener('pwa-prompt-ready', onPwaReady);
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
       window.removeEventListener('appinstalled', handleAppInstalled);
     };
@@ -63,13 +78,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {
       return;
     }
 
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const choice = await deferredPrompt.userChoice;
-      if (choice && choice.outcome === 'accepted') {
-        setDeferredPrompt(null);
-        setInstallSuccessToast(true);
-        setTimeout(() => setInstallSuccessToast(false), 5000);
+    const promptObj = deferredPrompt || (window as any).deferredPrompt;
+
+    if (promptObj) {
+      try {
+        await promptObj.prompt();
+        const choice = await promptObj.userChoice;
+        if (choice && choice.outcome === 'accepted') {
+          setDeferredPrompt(null);
+          (window as any).deferredPrompt = null;
+          setInstallSuccessToast(true);
+          setTimeout(() => setInstallSuccessToast(false), 5000);
+        }
+      } catch (err) {
+        console.warn('Install prompt error:', err);
+        setShowAndroidGuide(true);
       }
     } else {
       setShowAndroidGuide(true);
@@ -234,20 +257,37 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {
               </button>
             </div>
 
-            <p className="text-xs text-slate-600 leading-relaxed font-medium">
-              اضغط على زر <strong>(تثبيت التطبيق)</strong> من خيارات المتصفح ليظهر فوراً كأيقونة تطبيق كامل على شاشة هاتفك ويعمل بملء الشاشة بدون أي متصفح.
-            </p>
+            <div className="space-y-2 text-xs text-slate-600 text-right bg-slate-50 p-3 rounded-2xl border border-slate-100 leading-relaxed font-medium">
+              <p className="font-bold text-[#0F3D59] mb-1">لتثبيت التطبيق على شاشة هاتفك فوراً:</p>
+              <div className="flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center shrink-0">1</span>
+                <span>اضغط على قائمة المتصفح <strong>(الثلاث نقاط ⋮ بأعلى الشاشة)</strong>.</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center shrink-0">2</span>
+                <span>اختر <strong>«تثبيت التطبيق»</strong> أو <strong>«إضافة إلى الشاشة الرئيسية»</strong>.</span>
+              </div>
+            </div>
+
+            {/* Direct Open in Chrome Button for Xiaomi / In-App Browsers */}
+            <a
+              href="intent://mst-02.github.io/matrouh-jobs/#Intent;scheme=https;package=com.android.chrome;end"
+              className="w-full py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-black text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-colors"
+            >
+              <span>فتح مباشرة في متصفح Chrome الأصلي</span>
+            </a>
 
             <button
               onClick={() => {
-                if (deferredPrompt) {
-                  deferredPrompt.prompt();
+                const p = deferredPrompt || (window as any).deferredPrompt;
+                if (p) {
+                  p.prompt();
                 }
                 setShowAndroidGuide(false);
               }}
               className="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-colors"
             >
-              تثبيت الآن على الهاتف
+              تم، سأقوم بالتثبيت الآن
             </button>
           </div>
         </div>
